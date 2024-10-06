@@ -1,0 +1,6 @@
+@Poc.MassTransit.SingleContainer_HostAddress = http://localhost:5020
+
+GET {{Poc.MassTransit.SingleContainer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

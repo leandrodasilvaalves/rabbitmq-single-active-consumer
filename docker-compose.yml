@@ -1,0 +1,38 @@
+services:
+  api-1:
+    image: poc.masstransit.singlecontainer
+    build:
+      context: .
+      dockerfile: src/Poc.MassTransit.SingleContainer/Dockerfile
+    ports:
+      - 5021:5020
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MessageBroker__QueueSettings__HostName=rabbit
+      - MessageBroker__QueueSettings__ConsumerName=consumer-api-1
+    
+
+  api-2:
+    image: poc.masstransit.singlecontainer
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MessageBroker__QueueSettings__HostName=rabbit
+      - MessageBroker__QueueSettings__ConsumerName=consumer-api-2
+    depends_on: 
+      - api-1
+  
+  api-3:
+    image: poc.masstransit.singlecontainer
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MessageBroker__QueueSettings__HostName=rabbit
+      - MessageBroker__QueueSettings__ConsumerName=consumer-api-3
+    depends_on: 
+      - api-1
+
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A8ECAC6D-5695-4F3B-848D-185AA467722E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.MassTransit.SingleContainer", "src\Poc.MassTransit.SingleContainer\Poc.MassTransit.SingleContainer.csproj", "{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CEBF9D1-084C-4FDC-8A26-23A72F20DEC4} = {A8ECAC6D-5695-4F3B-848D-185AA467722E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64F36FA5-9B1B-478A-B58D-2A00C73CE347}
+	EndGlobalSection
+EndGlobal
