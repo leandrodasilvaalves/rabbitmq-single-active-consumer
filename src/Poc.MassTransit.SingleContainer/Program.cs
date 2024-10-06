@@ -4,13 +4,23 @@ using MassTransit;
 
 using Poc.MassTransit.SingleContainer;
 
+using Prometheus;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(builder.Configuration);
+builder.Services.UseHttpClientMetrics();
 
 var app = builder.Build();
+
+app.UseHttpMetrics(o =>
+{
+    o.AddCustomLabel("host", ctx => ctx.Request.Host.Value);
+});
+app.MapMetrics();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 

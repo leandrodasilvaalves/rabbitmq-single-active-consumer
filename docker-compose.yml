@@ -10,6 +10,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - MessageBroker__QueueSettings__HostName=rabbit
       - MessageBroker__QueueSettings__ConsumerName=consumer-api-1
+    mem_limit: 250M
+    cpus: 0.5
     
 
   api-2:
@@ -20,6 +22,8 @@ services:
       - MessageBroker__QueueSettings__ConsumerName=consumer-api-2
     depends_on: 
       - api-1
+    mem_limit: 250M
+    cpus: 0.5
   
   api-3:
     image: poc.masstransit.singlecontainer
@@ -29,6 +33,8 @@ services:
       - MessageBroker__QueueSettings__ConsumerName=consumer-api-3
     depends_on: 
       - api-1
+    mem_limit: 250M
+    cpus: 0.5
 
   rabbit:
     image: rabbitmq:3-management
@@ -36,3 +42,18 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - api-1
+    healthcheck:
+        test: wget -q --tries=1 -O- http://localhost:9090/
+        interval: 3s
+        timeout: 3s
+        retries: 10
+        start_period: 10s

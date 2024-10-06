@@ -1,4 +1,5 @@
 
+using System.Diagnostics;
 using System.Text.Json;
 
 using MassTransit;
@@ -17,11 +18,21 @@ public class SingleConsumer : IConsumer<SingleConsumerModel>
 
     public Task Consume(ConsumeContext<SingleConsumerModel> context)
     {
-        var message = context.Message;
-        message.ConsumerName = _settings.ConsumerName;
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
-        Console.WriteLine("Message: {0}", JsonSerializer.Serialize(message));
-        return Task.CompletedTask;
+        try
+        {
+            var message = context.Message;
+            message.ConsumerName = _settings.ConsumerName;
+
+            Console.WriteLine("Message: {0}", JsonSerializer.Serialize(message));
+            return Task.CompletedTask;
+        }
+        finally
+        {
+            Metric.Consumer.Observe(stopwatch.ElapsedMilliseconds);
+        }
     }
 }
 
